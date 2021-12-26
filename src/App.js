@@ -4,7 +4,7 @@ import Tasks from './componets/Tasks';
 import './App.css';
 
 const App = () => {
-  const [tasks, setTasks] = useState ([
+  const lista = [
     {
       id: "1",
       title: "Estudar Programação",
@@ -15,7 +15,9 @@ const App = () => {
       title: "Ler Livros",
       completed: "true",
     },
-  ]);
+  ]
+
+  const [tasks, setTasks] = useState(lista);
 
    return (
      <div>

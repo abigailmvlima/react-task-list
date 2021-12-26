@@ -1,6 +1,6 @@
 import React from 'react';
 
- const Task = ({task}) => {
+ const Task = ({ task }) => {
      return  <h1>{task.title}</h1>;
  }
   
