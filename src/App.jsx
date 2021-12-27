@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import Tasks from './componets/Tasks';
 import AddTask from './componets/AddTask';
+import Header from './componets/Header';
+
 import './App.css';
 
 const App = () => {
@@ -20,12 +23,29 @@ const App = () => {
 
   const [tasks, setTasks] = useState(lista)
 
+  useEffect(() => {
+    console.log("tasks", tasks)
+  }, [tasks])
+
+  const handleTaskClick = (taskId) => {
+    const newTasks = tasks.map((task) => {
+      return { ...task, completed: task.id == taskId }
+    });
+    setTasks(newTasks)
+  };
+
+  const handleTaskDeletion = (taskId) => {
+    const newTasks = tasks.filter((task) => task.id != taskId)
+    console.log(77,taskId, newTasks)
+    setTasks(newTasks)
+  }
+
   const handleTaskAddition = (taskTitle) => {
     const newTasks = [
       ...tasks,
       {
         title: taskTitle,
-        id: Math.random(10),
+        id: uuidv4(),
         completed: false,
       },
     ];
@@ -36,8 +56,12 @@ const App = () => {
   return (
     <div>
       <div className="container">
+        <Header />
         <AddTask handleTaskAddition={handleTaskAddition} />
-        <Tasks tasks={tasks} />
+        <Tasks
+          tasks={tasks}
+          handleTaskClick={handleTaskClick}
+          handleTaskDeletion={handleTaskDeletion} />
       </div>
 
     </div>
