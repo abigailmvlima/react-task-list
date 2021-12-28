@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Tasks from './componets/Tasks';
 import AddTask from './componets/AddTask';
@@ -23,9 +24,7 @@ const App = () => {
 
   const [tasks, setTasks] = useState(lista)
 
-  useEffect(() => {
-    console.log("tasks", tasks)
-  }, [tasks])
+  useEffect(() => {}, [tasks])
 
   const handleTaskClick = (taskId) => {
     const newTasks = tasks.map((task) => {
@@ -54,17 +53,22 @@ const App = () => {
   };
 
   return (
-    <div>
+    <Router>
       <div className="container">
         <Header />
-        <AddTask handleTaskAddition={handleTaskAddition} />
-        <Tasks
-          tasks={tasks}
-          handleTaskClick={handleTaskClick}
-          handleTaskDeletion={handleTaskDeletion} />
+       <Route path="/" exact render={() => (
+            <div>
+              <AddTask handleTaskAddition={handleTaskAddition} />
+              <Tasks
+                tasks={tasks}
+                handleTaskClick={handleTaskClick}
+                handleTaskDeletion={handleTaskDeletion} />
+            </div>
+          )}
+        />
       </div>
 
-    </div>
+    </Router>
   );
 };
 

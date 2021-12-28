@@ -16,7 +16,7 @@
 
 }
 
-.remove-task-button {
+.remove-task-button, .see-task-details-button{
     background-color: rgb(68, 68, 68);
     border: none;
     font-size: 24px;
